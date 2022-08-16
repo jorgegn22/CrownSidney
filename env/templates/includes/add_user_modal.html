@@ -1,0 +1,67 @@
+<!-- Modal -->
+
+<div class="modal fade" id="add-user-modal" tabindex="-1" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="exampleModalLabel">
+          Agregar nuevo Usuario
+        </h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <form action="/control_user" method="post">
+
+          <div class="modal-body">
+
+            <div class="form-floating" style="padding: 2px">
+              <label for="nombre">Id</label>
+              <input type="hidden" class="form-control" id="floatingInputid" readonly class="form-control-plaintext" name="id" />
+            </div>
+
+            <div class="form-floating" style="padding: 2px">
+              <label for="nombre">Nombre</label>
+              <input type="text" class="form-control" id="floatingInputname" name="name" />
+            </div>
+
+            <div class="form-floating" style="padding: 2px">
+              <label for="email">Email</label>
+              <input type="email" class="form-control" id="floatingInputemail" name="email" />
+            </div>
+
+            <div class="form-floating" style="padding: 2px">
+              <label for="fecha">Fecha de Nacimiento</label>
+              <input type="date" class="form-control" id="floatingInputdate"
+                min="1930-01-01" max="2022-12-31" name ="nacimiento"/>
+            </div>
+
+            <div class="form-floating" style="padding: 2px">
+              <label for="rol">Rol de Usuario</label>
+              <select class="custom-select" aria-label="Default select example" id="floatingInputrol", name="rol">
+                <option value="Usuario">Usuario</option>
+                <option value="Administrador">Administrador</option>
+                <option value="Super Administrador">Super Administrador</option>
+              </select>
+            </div>
+
+            <div class="form-floating" style="padding: 2px">
+              <label for="telefono">Telefono</label>
+              <input type="tel" class="form-control" id="floatingInputphone" name="phone" />
+            </div>
+
+            <div class="form-floating" style="padding: 2px">
+              <label for="documento">Documento</label>
+              <input type="text" class="form-control" id="floatingInputdocumento" name="documento"/>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+              Cerrar
+            </button>
+            <button type="submit" class="btn btn-success" name="action" value="agregar">Agregar</button>
+      </form>
+    </div>
+  </div>
+</div>
+</div>

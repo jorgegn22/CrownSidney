@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block title%}
+Gestion de Habitaciones
+{%endblock %}
+
+{% block content%}
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <!-- Your Columns HERE -->
+            <th scope="col">id</th>
+            <th scope="col">Numero de habitación</th>
+            <th scope="col">Disponibilidad</th>
+            <th scope="col">Costo</th>
+            <th scope="col">Opciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- Your rows inside the table HERE: -->
+        {% for room in rooms %}
+        {% include 'includes/mod_room_modal.html' %}
+        {% include 'includes/delete_room_modal.html' %}
+        {% include 'includes/add_room_modal.html' %}
+        <tr>
+            <td>{{ room.id }}</td>
+            <td>{{ room.roomNumber }}</td>
+            <td>{{ room.disponibilidad }}</td>
+            <td>{{ room.costo }}</td>
+            <td>
+                <button class="btn btn-outline btn-info" data-bs-toggle="modal"
+                    data-bs-target="#modal-room-{{room.id}}">Editar</button>
+                <button type="button" class="btn btn-outline btn-danger" data-bs-toggle="modal"
+                    data-bs-target="#modal-room-delete-{{room.id}}">Eliminar</button>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<button type="button" class="btn btn-success btn-lg btn-block" name="action" data-bs-toggle="modal"
+    data-bs-target="#add-room-modal">Agregar Nueva Habitacion</button>
+{%endblock %}

@@ -1,0 +1,45 @@
+<!-- Modal -->
+
+<div class="modal fade" id="modal-room-{{room.id}}" tabindex="-1" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">
+          Actualización de la Habitacion {{room.roomNumber}}
+        </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <form action="/control_rooms" method="post">
+
+          <div class="modal-body">
+
+            <div class="form-floating" style="padding: 2px">
+              <label for="nombre">Id</label>
+              <input type="text" class="form-control" id="floatingInputid" readonly class="form-control-plaintext" value="{{room.id}}" name="id" />
+            </div>
+
+            <div class="form-floating" style="padding: 2px">
+              <label for="nombre">No. de Habitacion</label>
+              <input type="text" class="form-control" id="floatingInputname" value="{{room.roomNumber}}" name="name" />
+            </div>
+
+            <div class="form-floating" style="padding: 2px">
+              <label for="email">Disponibilidad</label>
+              <select class="custom-select" aria-label="Default select example" id="floatingInputdisponibilidad", name="disponibilidad">
+                <option value="1">1</option>
+                <option value="0">0</option>
+            </select>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+              Cerrar
+            </button>
+            <button type="submit" class="btn btn-success" name="action" value="editar">Guardar</button>
+      </form>
+    </div>
+  </div>
+</div>
+</div>

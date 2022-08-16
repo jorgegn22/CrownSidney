@@ -1,0 +1,44 @@
+<!-- Modal -->
+
+<div class="modal fade" id="add-room-modal" tabindex="-1" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="exampleModalLabel">
+          Agregar nueva Habitacion
+        </h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <form action="/control_rooms_admin" method="post">
+
+          <div class="modal-body">
+
+            <div class="form-floating" style="padding: 2px">
+              <input type="hidden" class="form-control" id="floatingInputid" readonly class="form-control-plaintext" name="id" />
+            </div>
+
+            <div class="form-floating" style="padding: 2px">
+              <label for="roomNumber">No. de Habitacion</label>
+              <input type="text" class="form-control" id="floatingInputroomNumber" name="room_number" />
+            </div>
+
+            <div class="form-floating" style="padding: 2px">
+              <label for="disponibilidad">Disponibilidad</label>
+              <select class="custom-select" aria-label="Default select example" id="floatingInputdisponibilidad", name="disponibilidad">
+                <option value="1">1</option>
+                <option value="0">0</option>
+            </select>
+            </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+              Cerrar
+            </button>
+            <button type="submit" class="btn btn-success" name="action" value="agregar">Agregar</button>
+      </form>
+    </div>
+  </div>
+</div>
+</div>
