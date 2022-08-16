@@ -43,7 +43,7 @@ def login():
                     if rol[0]=="Administrador":
                         return redirect(url_for("adminPage", username = username))
                     if rol[0]=="Super Administrador":
-                        return redirect(url_for("panelSuper", username = username)) 
+                        return redirect(url_for("home_page", username = username)) 
                        
                 else:
                     return redirect(url_for('login')) 
