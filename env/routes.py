@@ -42,7 +42,7 @@ def login():
                         return render_template("shop.html", datosuser = sql2[0], session = session)
                     if rol[0]=="Administrador":
                         return redirect(url_for("adminPage", username = username))
-                    else:
+                    if rol[0]=="Super Administrador":
                         return redirect(url_for("panelSuper", username = username)) 
                        
                 else:
