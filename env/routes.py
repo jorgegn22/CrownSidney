@@ -39,11 +39,12 @@ def login():
                     session['Correo'] = username
                    
                     if rol[0]=="Usuario":
-                        return render_template("shop.html", datosuser = sql2[0], session = session)
+                        return redirect(url_for('Reservar'))
+                        #return render_template("shop.html", datosuser = sql2[0], session = session)
                     if rol[0]=="Administrador":
-                        return redirect(url_for("adminPage", username = username))
+                        return redirect(url_for("adminPage"))
                     if rol[0]=="Super Administrador":
-                        return redirect(url_for("home_page", username = username)) 
+                        return redirect(url_for("home_page")) 
                        
                 else:
                     return redirect(url_for('login')) 
@@ -171,34 +172,48 @@ Panel SuperUsuario - Vicente
 
 @app.route('/controlpanel')
 def home_page():
-    return render_template('panelSuper.html')
-
+    user_rol = User.query.filter_by(email_address = session['Correo']).first().rol
+    
+    if user_rol == "Super Administrador":
+        return render_template('panelSuper.html')
+    else:
+        return redirect(url_for('Reservar'))
+    
 @app.route('/control_user', methods=['GET','POST'])
 def crud_usuario_page():
     
-    if request.method == 'POST':        
-        updated_user = User.query.filter_by(id=request.form.get('id')).first()        
-        if request.form.get('action') == 'editar':            
-            updated_user.name = request.form.get('name')
-            updated_user.birth_date = datetime.strptime(str(request.form.get('nacimiento')),'%Y-%m-%d')
-            updated_user.rol = request.form.get('rol')
-            updated_user.phone = request.form.get('phone')
-            updated_user.document = request.form.get('documento')
-            updated_user.email = request.form.get('email')
-            db.session.add(updated_user)
-            db.session.commit()            
-            flash('Usuario actualizado',category='success')        
-        if request.form.get('action') == 'agregar':            
-            User.create_user(request.form.get('name'),datetime.strptime(str(request.form.get('nacimiento')),'%Y-%m-%d'),request.form.get('rol'),request.form.get('phone'),
-                             request.form.get('documento'),request.form.get('email'),'password_temp')            
-            flash('Usuario Creado',category='success')             
-        if request.form.get('action') == 'eliminar':            
-            User.delete_user(updated_user.id)
-            flash('Usuario eliminado',category='success')          
-        return redirect(url_for('crud_usuario_page'))
-    if request.method == 'GET':        
-        users = User.query.all()
-        return render_template('userCrud.html',users = users)
+    user_rol = User.query.filter_by(email_address = session['Correo']).first().rol
+    
+    if user_rol == "Super Administrador":
+        
+        if request.method == 'POST':        
+            updated_user = User.query.filter_by(id=request.form.get('id')).first()        
+            if request.form.get('action') == 'editar':            
+                updated_user.name = request.form.get('name')
+                updated_user.birth_date = datetime.strptime(str(request.form.get('nacimiento')),'%Y-%m-%d')
+                updated_user.rol = request.form.get('rol')
+                updated_user.phone = request.form.get('phone')
+                updated_user.document = request.form.get('documento')
+                updated_user.email = request.form.get('email')
+                db.session.add(updated_user)
+                db.session.commit()            
+                flash('Usuario actualizado',category='success')        
+            if request.form.get('action') == 'agregar':            
+                User.create_user(request.form.get('name'),datetime.strptime(str(request.form.get('nacimiento')),'%Y-%m-%d'),request.form.get('rol'),request.form.get('phone'),
+                                 request.form.get('documento'),request.form.get('email'),'password_temp')            
+                flash('Usuario Creado',category='success')             
+            if request.form.get('action') == 'eliminar':            
+                User.delete_user(updated_user.id)
+                flash('Usuario eliminado',category='success')          
+            return redirect(url_for('crud_usuario_page'))
+        if request.method == 'GET':        
+            users = User.query.all()
+            return render_template('userCrud.html',users = users)
+    
+    else: 
+        #flash('Usuario invalido', category = 'error')
+        return redirect(url_for('Reservar'))
+    
 
 @app.route('/control_rooms', methods=['GET','POST'])
 def crud_room_page():
