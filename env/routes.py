@@ -102,6 +102,7 @@ def AsignarHabitacion(nHab):
         fmin = fmin.strftime("%Y-%m-%d")
     else:
         fmin = fmin[0]
+        fmin = fmin[:10]
     print(fmin)
     usuario = session['Correo']
     return render_template("shop-single.html",nHab=nHab,usuario=usuario,fmin=fmin)
